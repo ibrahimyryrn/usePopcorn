@@ -7,7 +7,7 @@ function Navbar() {
       </div>
       <input className="search" type="text" placeholder="Search" />
       <p className="num-results">Found X results</p>
-      <p>trtrtrr</p>
+      <p>qwerty</p>
     </div>
   );
 }
