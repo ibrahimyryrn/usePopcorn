@@ -1,4 +1,4 @@
-function Navbar() {
+function Navbar({ children }) {
   return (
     <div className="nav-bar">
       <div className="logo">
@@ -6,8 +6,7 @@ function Navbar() {
         <h1>usePopcorn</h1>
       </div>
       <input className="search" type="text" placeholder="Search" />
-      <p className="num-results">Found X results</p>
-      <p>bas</p>
+      {children}
     </div>
   );
 }
