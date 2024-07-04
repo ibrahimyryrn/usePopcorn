@@ -295,9 +295,9 @@ body {
   background-color: var(--color-primary);
   color: var(--color-text);
   border: none;
-  border-radius: 10rem;
-  font-size: 1.4rem;
-  padding: 1rem;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  padding: 0.7rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;

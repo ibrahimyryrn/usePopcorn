@@ -1,22 +1,22 @@
-import { useState } from "react";
-
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+const sum = (arr) => arr.reduce((acc, cur) => acc + cur, 0);
 
-function HeadWatched({ watched }) {
-  const [isOpen2, setIsOpen2] = useState(false);
-
+function HeadWatched({ watched, isOpen2, setSelectedId, setWatched }) {
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
-  const avgUserRating = average(watched.map((movie) => movie.userRating));
-  const avgRunTime = average(watched.map((movie) => movie.runtime));
+  const sumTime = sum(watched.map((movie) => movie.runtime));
+
+  function handleSelectedMovie(id) {
+    setSelectedId(id);
+  }
+
+  function handleDeleteMovieWatchedList(id, event) {
+    event.stopPropagation();
+    setWatched(watched.filter((watched) => watched.imdbID !== id));
+  }
+
   return (
-    <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
-      >
-        {isOpen2 ? "-" : "+"}
-      </button>
+    <>
       {isOpen2 && (
         <>
           <div className="summary">
@@ -28,22 +28,21 @@ function HeadWatched({ watched }) {
               </p>
               <p>
                 <span>⭐</span>
-                <span>{avgImdbRating}</span>
-              </p>
-              <p>
-                <span>🌟</span>
-                <span>{avgUserRating}</span>
+                <span>{avgImdbRating.toFixed(1)}</span>
               </p>
               <p>
                 <span>⏳</span>
-                <span>{avgRunTime}</span>
+                <span>{sumTime} min</span>
               </p>
             </div>
           </div>
 
-          <ul className="list">
+          <ul className="list list-movies">
             {watched?.map((movie) => (
-              <li key={movie.imdbID}>
+              <li
+                key={movie.imdbID}
+                onClick={() => handleSelectedMovie(movie.imdbID)}
+              >
                 <img src={movie.Poster} alt={`${movie.Title} poster`} />
                 <h3>{movie.Title}</h3>
                 <div>
@@ -52,20 +51,24 @@ function HeadWatched({ watched }) {
                     <span>{movie.imdbRating}</span>
                   </p>
                   <p>
-                    <span>🌟</span>
-                    <span>{movie.userRating}</span>
-                  </p>
-                  <p>
                     <span>⏳</span>
-                    <span>{movie.runtime} min</span>
+                    <span>{movie.runtime} min </span>
                   </p>
+                  <button
+                    className="btn-delete"
+                    onClick={(event) =>
+                      handleDeleteMovieWatchedList(movie.imdbID, event)
+                    }
+                  >
+                    X
+                  </button>
                 </div>
               </li>
             ))}
           </ul>
         </>
       )}
-    </div>
+    </>
   );
 }
 
