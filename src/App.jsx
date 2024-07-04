@@ -27,7 +27,7 @@ function App() {
       try {
         // API'den veri çekmek için axios kullanıyoruz
         const response = await axios.get(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
         );
         if (response.data.Response === "True") {
           setMovies(response.data.Search); // Film listesini günceller

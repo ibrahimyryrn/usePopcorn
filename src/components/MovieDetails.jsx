@@ -25,7 +25,7 @@ function MovieDetails({ selectedId, setSelectedId, setWatched }) {
   useEffect(() => {
     const getMovieDetails = async () => {
       const response = await axios.get(
-        `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+        `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
       );
       setMovie(response.data);
     };
