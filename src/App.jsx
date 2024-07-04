@@ -21,35 +21,33 @@ function App() {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      setIsLoading(true); // API çağrısının başladığını gösterir
-      setError(""); // Hata mesajını sıfırlar
+      setIsLoading(true);
+      setError("");
 
       try {
-        // API'den veri çekmek için axios kullanıyoruz
         const response = await axios.get(
           `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
         );
         if (response.data.Response === "True") {
-          setMovies(response.data.Search); // Film listesini günceller
+          setMovies(response.data.Search);
         } else {
-          setError("Movie not found"); // Hata mesajı
+          setError("Movie not found");
         }
       } catch (err) {
-        setError(err.message); // Hata mesajını yakalar
+        setError(err.message);
       } finally {
-        setIsLoading(false); // İstek tamamlandığında yükleme durumunu sona erdirir
+        setIsLoading(false);
       }
     };
 
-    // Erken çıkış: Sorgu 3 karakterden azsa API çağrısı yapılmaz
     if (query.length < 3) {
       setMovies([]);
-      setIsLoading(false); // Yükleme durumunu sona erdirir
-      return; // Erken çıkış
+      setIsLoading(false);
+      return;
     }
 
-    fetchMovies(); // fetchMovies fonksiyonunu çağırır
-  }, [query]); // query değiştiğinde useEffect çalışır
+    fetchMovies();
+  }, [query]);
 
   return (
     <>

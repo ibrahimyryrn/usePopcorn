@@ -34,12 +34,10 @@ function MovieDetails({ selectedId, setSelectedId, setWatched }) {
 
   function handleAddWatchedList(movie) {
     setWatched((watched) => {
-      // Filmin watched listesinde olup olmadığını kontrol ediyoruz
       const isAlreadyWatched = watched.some(
         (watchedMovie) => watchedMovie.imdbID === movie.imdbID
       );
 
-      // Eğer film listede yoksa ekliyoruz
       if (!isAlreadyWatched) {
         return [
           ...watched,
@@ -54,7 +52,6 @@ function MovieDetails({ selectedId, setSelectedId, setWatched }) {
         ];
       }
 
-      // Film zaten listede ise mevcut listeyi geri döndürüyoruz
       return watched;
     });
   }
